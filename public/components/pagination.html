@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination Component</title>
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Pagination container */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Individual page links */
+        .pagination a {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 0 5px;
+            background-color: #ffffff;
+            color: #007bff;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Hover effect for page links */
+        .pagination a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Disabled state for page links */
+        .pagination a.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+            border-color: #ddd;
+        }
+
+        /* Active page link */
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        /* Previous and Next buttons */
+        .pagination .prev,
+        .pagination .next {
+            padding: 10px 15px;
+            background-color: #ffffff;
+            color: #007bff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pagination .prev:hover,
+        .pagination .next:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .pagination .prev.disabled,
+        .pagination .next.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pagination" id="pagination">
+        <a href="#" class="prev disabled" id="prevBtn">&laquo; Previous</a>
+        <a href="#" class="page-num active" data-page="1">1</a>
+        <a href="#" class="page-num" data-page="2">2</a>
+        <a href="#" class="page-num" data-page="3">3</a>
+        <a href="#" class="page-num" data-page="4">4</a>
+        <a href="#" class="page-num" data-page="5">5</a>
+        <a href="#" class="next" id="nextBtn">Next &raquo;</a>
+    </div>
+
+    <script>
+        // JavaScript for handling page clicks and updating active page
+        const pageLinks = document.querySelectorAll('.page-num');
+        const prevButton = document.getElementById('prevBtn');
+        const nextButton = document.getElementById('nextBtn');
+        let currentPage = 1; // Current active page
+
+        // Function to handle page change
+        function handlePageChange(newPage) {
+            if (newPage === currentPage) return; // Prevent updating if same page is clicked
+
+            // Update current page
+            currentPage = newPage;
+
+            // Update active class for page numbers
+            pageLinks.forEach(link => {
+                link.classList.remove('active');
+                if (parseInt(link.getAttribute('data-page')) === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Enable or disable Previous/Next buttons
+            if (currentPage === 1) {
+                prevButton.classList.add('disabled');
+            } else {
+                prevButton.classList.remove('disabled');
+            }
+
+            if (currentPage === pageLinks.length) {
+                nextButton.classList.add('disabled');
+            } else {
+                nextButton.classList.remove('disabled');
+            }
+
+            console.log(`You are on page ${currentPage}`);
+        }
+
+        // Add event listener to each page link
+        pageLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                const page = parseInt(event.target.getAttribute('data-page'));
+                handlePageChange(page);
+            });
+        });
+
+        // Add event listener for Previous button
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 1) {
+                handlePageChange(currentPage - 1);
+            }
+        });
+
+        // Add event listener for Next button
+        nextButton.addEventListener('click', () => {
+            if (currentPage < pageLinks.length) {
+                handlePageChange(currentPage + 1);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

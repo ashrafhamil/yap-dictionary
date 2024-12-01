@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Right Sidenav Component</title>
+    <style>
+        /* Ensure body takes full height */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Right Sidebar Styling */
+        .sidenav-right {
+            height: 100%;
+            width: 250px;
+            /* Default width when open */
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: width 0.3s ease;
+            padding-top: 60px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hide text when the sidenav is minimized */
+        .sidenav-right.small a {
+            display: none;
+        }
+
+        .sidenav-right a {
+            display: block;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .sidenav-right a:hover {
+            background-color: #575757;
+        }
+
+        /* Small Sidenav Styling when closed */
+        .sidenav-right.small {
+            width: 50px;
+            /* Small width when closed */
+        }
+
+        /* Hamburger icon inside the small sidenav */
+        .sidenav-right .toggle-btn {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* Main content Styling */
+        .main-content {
+            transition: margin-right 0.3s ease;
+            padding: 20px;
+            margin-right: 250px;
+            /* Shift the content to the left when sidenav is open */
+        }
+
+        /* Adjust content when sidenav is minimized */
+        .main-content.shifted {
+            margin-right: 50px;
+            /* Shift content when sidenav is small */
+        }
+
+        /* Hide the close button when the sidenav is minimized */
+        .sidenav-right .close-btn {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidenav-right" id="sidenav-right">
+        <!-- Hamburger icon to toggle sidenav (when closed) -->
+        <span class="toggle-btn" onclick="toggleSidenav()">&#9776;</span>
+
+        <!-- Left arrow to toggle sidenav (when open) -->
+        <span class="toggle-btn" id="left-arrow" onclick="toggleSidenav()" style="display: none;">&#8594;</span>
+
+        <!-- Text Links (hidden when small) -->
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <div class="main-content" id="main-content">
+        <h2>Right Sidenav Example</h2>
+        <p>Click on the links in the sidenav to navigate to different pages.</p>
+    </div>
+
+    <script>
+        // Function to close the sidenav and make it small
+        function closeNav() {
+            document.getElementById("sidenav-right").classList.add("small"); // Add small class to sidenav
+            document.getElementById("main-content").classList.add("shifted"); // Shift the content
+            document.getElementById("left-arrow").style.display = "none"; // Hide left arrow
+            document.querySelector(".toggle-btn").style.display = "inline"; // Show hamburger icon
+        }
+
+        // Function to open the sidenav back to full size
+        function openNav() {
+            document.getElementById("sidenav-right").classList.remove("small"); // Remove small class
+            document.getElementById("main-content").classList.remove("shifted"); // Remove shift from content
+            document.getElementById("left-arrow").style.display = "inline"; // Show left arrow
+            document.querySelector(".toggle-btn").style.display = "none"; // Hide hamburger icon
+        }
+
+        // Toggle function for opening and closing the sidenav
+        function toggleSidenav() {
+            const sidenav = document.getElementById("sidenav-right");
+            if (sidenav.classList.contains("small")) {
+                openNav(); // Open the sidenav
+            } else {
+                closeNav(); // Close the sidenav
+            }
+        }
+
+        // Set initial state for opened sidenav
+        openNav(); // Ensure sidenav is open initially
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating Component</title>
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        /* Rating container */
+        .rating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Individual star styling */
+        .rating span {
+            font-size: 30px;
+            cursor: pointer;
+            color: #ccc;
+            /* Default color for unselected stars */
+            transition: color 0.2s;
+        }
+
+        /* Hover effect for stars */
+        .rating span:hover,
+        .rating span.hover {
+            color: #ffb400;
+            /* Yellow color when hovering over the star */
+        }
+
+        /* Active stars (selected rating) */
+        .rating span.selected {
+            color: #ffb400;
+            /* Yellow color for selected stars */
+        }
+
+        /* Container for showing the selected rating */
+        .rating-value {
+            margin-top: 10px;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="rating" id="rating">
+        <span data-value="1">&#9733;</span>
+        <span data-value="2">&#9733;</span>
+        <span data-value="3">&#9733;</span>
+        <span data-value="4">&#9733;</span>
+        <span data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value" id="rating-value">Rating: 0</div>
+
+    <script>
+        // Select all the stars
+        const stars = document.querySelectorAll('.rating span');
+        const ratingValueElement = document.getElementById('rating-value');
+        let ratingValue = 0; // Default rating value
+
+        // Function to handle hover effect
+        function handleHover(event) {
+            const value = event.target.getAttribute('data-value');
+            stars.forEach(star => {
+                if (star.getAttribute('data-value') <= value) {
+                    star.classList.add('hover');
+                } else {
+                    star.classList.remove('hover');
+                }
+            });
+        }
+
+        // Function to remove hover effect
+        function removeHover() {
+            stars.forEach(star => {
+                star.classList.remove('hover');
+            });
+        }
+
+        // Function to handle click and set the rating
+        function handleClick(event) {
+            ratingValue = event.target.getAttribute('data-value');
+            updateRating();
+        }
+
+        // Function to update the UI with the selected rating
+        function updateRating() {
+            stars.forEach(star => {
+                const value = star.getAttribute('data-value');
+                if (value <= ratingValue) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+            ratingValueElement.textContent = `Rating: ${ratingValue}`;
+        }
+
+        // Add event listeners to each star
+        stars.forEach(star => {
+            star.addEventListener('mouseover', handleHover); // On hover
+            star.addEventListener('mouseout', removeHover);  // Remove hover
+            star.addEventListener('click', handleClick);     // On click to set rating
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar Component</title>
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        /* Container for the search bar */
+        .search-container {
+            display: flex;
+            align-items: center;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Search input field */
+        .search-input {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+        }
+
+        /* Clear button */
+        .clear-btn {
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+            color: #888;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .clear-btn:hover {
+            color: #007bff;
+        }
+
+        /* Optional styling for search icon */
+        .search-icon {
+            font-size: 20px;
+            margin-right: 10px;
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Search Bar Component</h2>
+
+    <!-- Search Bar Container -->
+    <div class="search-container">
+        <!-- Optional search icon -->
+        <span class="search-icon">&#128269;</span>
+
+        <!-- Search Input Field -->
+        <input type="text" class="search-input" id="searchInput" placeholder="Search..." oninput="filterSearch()">
+
+        <!-- Clear Button -->
+        <button class="clear-btn" onclick="clearSearch()">&#10006;</button>
+    </div>
+
+    <div id="searchResult">
+        <!-- You can display search results here dynamically -->
+        <p id="noSearch">No results yet. Start typing to search.</p>
+    </div>
+
+    <script>
+        // Function to filter search input
+        function filterSearch() {
+            const searchInput = document.getElementById('searchInput').value;
+            const noSearchMessage = document.getElementById('noSearch');
+
+            // If input is empty, show the message "No results yet"
+            if (searchInput.trim() === '') {
+                noSearchMessage.textContent = 'No results yet. Start typing to search.';
+            } else {
+                noSearchMessage.textContent = `Searching for: ${searchInput}`;
+            }
+        }
+
+        // Function to clear the search input
+        function clearSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const noSearchMessage = document.getElementById('noSearch');
+            searchInput.value = ''; // Clear the input field
+            noSearchMessage.textContent = 'No results yet. Start typing to search.';
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch/Toggle Button Component</title>
+    <style>
+        /* Body and center the content */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Styling for the switch container */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* Slider styling */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        /* Circle inside the slider */
+        .slider:before {
+            content: "";
+            position: absolute;
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+        }
+
+        /* When the switch is checked, move the circle and change background */
+        input:checked+.slider {
+            background-color: #4CAF50;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Optional: styling for text label */
+        .switch-label {
+            margin-left: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <label class="switch">
+        <!-- The checkbox to toggle the switch -->
+        <input type="checkbox" id="toggle-switch" aria-label="switch">
+        <span class="slider"></span>
+    </label>
+
+    <span class="switch-label" id="switch-label">Off</span>
+
+    <script>
+        // Get the checkbox and label elements
+        const toggleSwitch = document.getElementById('toggle-switch');
+        const switchLabel = document.getElementById('switch-label');
+
+        // Add event listener for change in the checkbox state
+        toggleSwitch.addEventListener('change', function () {
+            if (toggleSwitch.checked) {
+                switchLabel.textContent = "On"; // Set label to 'On' when checked
+            } else {
+                switchLabel.textContent = "Off"; // Set label to 'Off' when unchecked
+            }
+        });
+    </script>
+
+</body>
+
+</html>

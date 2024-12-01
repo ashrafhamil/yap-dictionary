@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        /* Progress bar container */
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            height: 30px;
+            position: relative;
+        }
+
+        /* Actual progress bar */
+        .progress-bar {
+            height: 100%;
+            background-color: #4caf50;
+            /* Green color for the progress */
+            width: 0%;
+            /* Initial width */
+            transition: width 0.5s ease;
+            /* Smooth transition when updating */
+        }
+
+        /* Progress label */
+        .progress-label {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Container to show progress information */
+        .progress-info {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Button styling */
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Progress Bar</h2>
+
+    <!-- Progress Bar Container -->
+    <div class="progress-container" id="progress-container">
+        <div class="progress-label" id="progress-label">0%</div>
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <!-- Button to simulate progress -->
+    <button onclick="updateProgress()">Start Progress</button>
+
+    <div class="progress-info">
+        <p>Click the button to start the progress. The progress will update by 10% every second.</p>
+    </div>
+
+    <script>
+        // Function to update the progress bar
+        function updateProgress() {
+            let progress = 0;
+            const progressBar = document.getElementById('progress-bar');
+            const progressLabel = document.getElementById('progress-label');
+
+            // Ensure that the progress bar starts from 0% when clicked
+            progressBar.style.width = '0%';
+            progressLabel.textContent = '0%';
+
+            // Simulate progress by updating every second
+            const interval = setInterval(() => {
+                if (progress >= 100) {
+                    clearInterval(interval); // Stop the progress once it reaches 100%
+                } else {
+                    progress += 10; // Increase progress by 10%
+                    progressBar.style.width = progress + '%'; // Update the width of the progress bar
+                    progressLabel.textContent = progress + '%'; // Update the label text
+                }
+            }, 1000); // Update progress every second
+        }
+    </script>
+
+</body>
+
+</html>

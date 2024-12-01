@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion Component</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Accordion container */
+        .accordion {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Accordion item */
+        .accordion-item {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            margin: 5px 0;
+        }
+
+        /* Accordion header */
+        .accordion-header {
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            text-align: left;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background-color: #0056b3;
+        }
+
+        /* Accordion content (hidden by default) */
+        .accordion-content {
+            padding: 15px;
+            background-color: #f9f9f9;
+            display: none;
+            /* Hidden by default */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="accordion">
+        <div class="accordion-item">
+            <button class="accordion-header">Section 1</button>
+            <div class="accordion-content">
+                <p>This is the content of section 1. You can add any text, images, or other content here.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button class="accordion-header">Section 2</button>
+            <div class="accordion-content">
+                <p>This is the content of section 2. You can add any text, images, or other content here.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button class="accordion-header">Section 3</button>
+            <div class="accordion-content">
+                <p>This is the content of section 3. You can add any text, images, or other content here.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get all accordion headers
+        const headers = document.querySelectorAll('.accordion-header');
+
+        // Function to toggle the accordion content
+        headers.forEach(header => {
+            header.addEventListener('click', function () {
+                const content = this.nextElementSibling;
+
+                // Toggle visibility of the content
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                } else {
+                    content.style.display = 'block';
+                }
+
+                // Optionally, close other sections when one opens
+                const allContent = document.querySelectorAll('.accordion-content');
+                allContent.forEach(item => {
+                    if (item !== content) {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Code Dynamically</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/themes/prism.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .code-container {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        pre {
+            margin: 0;
+        }
+
+        .button-container {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="button-container">
+        <!-- Buttons to show code for different components -->
+        <button onclick="showCode('button')">Show Button Code</button>
+        <button onclick="showCode('modal')">Show Modal Code</button>
+        <button onclick="showCode('accordion')">Show Accordion Code</button>
+    </div>
+
+    <div class="code-container">
+        <pre><code id="code-display" class="language-html"></code></pre>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js"></script>
+    <script>
+        // Define code for different components
+        const codeSnippets = {
+            button: `<button onclick="alert('Button clicked!')">Click Me</button>`,
+            modal: `<div class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="closeModal()">&times;</span>
+                            <p>Modal Content Here</p>
+                        </div>
+                    </div>`,
+            accordion: `<div class="accordion">
+                            <div class="accordion-item">
+                                <div class="accordion-header">Accordion Header</div>
+                                <div class="accordion-body">Accordion Content</div>
+                            </div>
+                        </div>`
+        };
+
+        // Function to display code dynamically
+        function showCode(component) {
+            const codeDisplayElement = document.getElementById('code-display');
+            if (codeSnippets[component]) {
+                // Set the code inside the <code> tag
+                codeDisplayElement.textContent = codeSnippets[component];
+                // Apply syntax highlighting using PrismJS
+                Prism.highlightElement(codeDisplayElement);
+            }
+        }
+    </script>
+</body>
+
+</html>

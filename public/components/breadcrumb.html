@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breadcrumb Component</title>
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        /* Breadcrumb container */
+        .breadcrumb {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: transparent;
+        }
+
+        /* Breadcrumb items */
+        .breadcrumb li {
+            display: inline-block;
+        }
+
+        /* Links in breadcrumb */
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+            padding: 5px 10px;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #0056b3;
+        }
+
+        /* Separator between breadcrumb items */
+        .breadcrumb li+li::before {
+            content: ">";
+            padding: 0 10px;
+            color: #6c757d;
+        }
+
+        /* Active breadcrumb item (current page) */
+        .breadcrumb .active {
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Category</a></li>
+            <li><a href="#">Subcategory</a></li>
+            <li class="active">Current Page</li>
+        </ul>
+    </nav>
+
+</body>
+
+</html>
